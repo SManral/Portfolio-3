@@ -1,0 +1,54 @@
+<html>
+<div class="container">
+    <div class="panel">
+    <div class="pageHeader"><h1>Signup Form</h1></div>
+    <form name="form" ng-submit="signup(user)"  role="form" novalidate>   
+    
+    <div class="form-group">
+        <label for="firstName">First Name</label><br>
+        <input id="firstName" type="text" ng-model="user.firstName" id="firstName" class="validate" name="firstName" required />
+        <span ng-show="form.firstName.$invalid && !form.firstName.$pristine" class="help-block">First name is required</span>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label><br>
+        <input id="lastName" type="text" ng-model="user.lastName" id="lastName" class="validate" name="lastName" required />
+       <span ng-show="form.lastName.$invalid && !form.lastName.$pristine" class="help-block">Last name is required</span>
+    </div>
+    <div class="form-group">
+        <label for="username">Username</label><br>
+        <input type="text" name="username" id="username" class="validate" ng-model="user.username" required/>
+        <span ng-show="form.username.$invalid && !form.username.$pristine" class="help-block">Username is required.</span>
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone</label><br>
+        <input type="text" name="phone" id="phone" class="validate" ng-model="user.phone" ng-minlength="10" ng-maxlength="10" />
+        <span ng-show="form.phone.$error.number || ((form.phone.$error.minlength ||
+        form.phone.$error.maxlength) && 
+        form.phone.$dirty)" class="help-block">Phone number is invalid.</span>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label><br>
+        <input id="email" type="email" name="email" ng-model="user.email" id="email" class="validate" required />
+        <span ng-show="form.email.$error.email && !form.email.$pristine" class="help-block">Email is invalid.</span>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label><br>
+        <input type="password" name="password" id="password" class="validate" ng-model="user.password" required />
+        <p ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required.</p>
+    </div><br>
+    <div class="submit">
+               <button type="submit" name="sub" ng-disabled="form.$invalid" class="submitButton">Signup</button>
+               <a href="#/login" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+<div>
+<style>
+button:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+}
+</style>
+
+</div>
+
+</html>
