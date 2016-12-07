@@ -1,0 +1,17 @@
+.left {
+  width:70%;
+  float:left;
+}
+​
+.right {
+  width:27%;
+  float:right;
+}
+
+@media screen and (max-width:767px) {
+  
+  .right,
+  .left {
+    width:100%;
+  }
+}

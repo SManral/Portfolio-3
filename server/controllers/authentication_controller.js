@@ -56,26 +56,3 @@ module.exports.login = function(req, res){
 		}
 	})
 }
-module.exports.loginFromApp = function(req, res){
-	req.query.username = req.query.username.toLowerCase();
-	req.query.password = req.query.password.toLowerCase();
-	
-	User.find({
-		'$and': [{username:req.query.username},{password:req.query.password}]
-	}, function(err, success){
-		if(success && success.length == 1){
-			var user = success[0];
-			var userData = {
-				username: user.username,
-				firstname: user.firstname,
-				_id: user._id,
-				lastname: user.lastname
-			}
-			console.log(userData);
-			res.json({res: "success", data: userData});
-		}
-		else {
-			res.json({res: 'error', data:'Login or password are wrong'});
-		}
-	})
-}
