@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var authenticationController = require('./server/controllers/authentication_controller');
 
+//database name portfolio3db
 mongoose.connect('mongodb://localhost:27017/portfolio3db');
 
 app.use(bodyParser.json());

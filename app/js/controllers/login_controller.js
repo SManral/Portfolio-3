@@ -18,7 +18,8 @@ angular.module('myApp')
 					$scope.callback = '';
 					callback.data.type = "user";
 					localStorage.setItem('User-Data', JSON.stringify(callback.data));
-					$state.go('users_home');
+					//page it must route to if user ogs in successfully
+					//<todo>
 				}
 				console.log(callback);
 			}).error(function(err){
