@@ -4,14 +4,6 @@ var User = require('../datasets/users');
 module.exports.signup = function(req, res){
 	req.body.username = req.body.username.toLowerCase();
 	req.body.password = req.body.password.toLowerCase();
-	var user = new User(req.body);
-	user.save();
-	res.json(req.body);	
-	console.log(req.body);
-
-
-//finds if a user by the username used to signup already exists in database if so gives an error
-//otherwise if a user by same username does not exist in db then it saves data to users collection(table) in mongodb. 
 	User.find({
 		'$or': [{username: req.body.username}, {password: req.body.password}]
 	}, function(err, result){
@@ -22,7 +14,7 @@ module.exports.signup = function(req, res){
 				username : req.body.username,
 				email: req.body.email,
 				_id: user._id,
-				firstname: req.body.firstname
+				firstname: req.body.firstName
 			}
 			console.log(userData);
 			res.json({res: 'success', data: userData});	
