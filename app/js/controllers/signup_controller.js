@@ -17,6 +17,7 @@ angular.module('myApp')
 			console.log(callback);
 			$state.go('login');
 		}).error(function(err){
+			
 			console.log(err)
 		})
 	}
