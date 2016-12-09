@@ -95,6 +95,18 @@ angular.module('myApp')
   $scope.pointsNeededForC = 0;
   $scope.pointsNeededForD = 0;
 
+  $scope.percentNeededForA = 0;
+  $scope.percentNeededForB = 0;
+  $scope.percentNeededForC = 0;
+
+  for (var i = 0; i < $scope.grades.length; i++){
+    $scope.$watch('grades['+i+'].num',
+      function(){
+        //console.log(newVal + " hello");
+        $scope.totalWeight = weightsCorrect();
+      }
+    );
+  }
 
   $scope.$watch('finalWeight',
   function (newVal, oldVal) {
@@ -104,6 +116,10 @@ angular.module('myApp')
     $scope.totalWeight = weightsCorrect();
   });
 
+  $scope.$watch('finalPtsPossible',
+  function () {
+    $scope.totalWeight = weightsCorrect();
+  });
 
   // $scope.categories[0].addAssignment("Assignment", 50);
   // $scope.categories[0].addAssignment("Assignment", 60);
@@ -115,16 +131,30 @@ angular.module('myApp')
         curGrade += ($scope.categories[i].getPercent());
     }
 
+    curGrade = parseInt(curGrade);
     $scope.currentGrade = curGrade;
-    $scope.currentGradeWithoutFinal = (curGrade / (100 - $scope.finalWeight)) * 100;
+    $scope.currentGradeWithoutFinal = (curGrade / (100 - ($scope.finalWeight))) * 100;
+    console.log("current grade:" + curGrade + " grade without final " + $scope.currentGradeWithoutFinal);
 
     // console.log(curGrade);
     // console.log((curGrade / (100 - $scope.finalWeight)) * 100);
 
     //points or percent
-    var percentForA = (90 - $scope.currentGradeWithoutFinal) / finalWeight
-    $scope.pointsNeededForA = Math.ciel(percentForA * $scope.finalPtsPossible);
-    console.log("per for A " + percentForA + " points for A ");
+    var temp =  ($scope.grades[0].num - $scope.currentGrade);
+    var percentForA = ($scope.grades[0].num - $scope.currentGrade) / $scope.finalWeight;
+    $scope.percentNeededForA = percentForA * 100;
+    $scope.pointsNeededForA = Math.ceil(percentForA * $scope.finalPtsPossible);
+    console.log("temp: "+temp+" percent for A " + percentForA * 100 + " points for A " + $scope.pointsNeededForA);
+
+    var percentForB = ($scope.grades[1].num - $scope.currentGrade) / $scope.finalWeight;
+    $scope.percentNeededForB = percentForB * 100;
+    $scope.pointsNeededForB = Math.ceil(percentForA * $scope.finalPtsPossible);
+    console.log("temp: "+temp+" percent for B " + percentForB * 100 + " points for B " + $scope.pointsNeededForB);
+
+    var percentForC = ($scope.grades[2].num - $scope.currentGrade) / $scope.finalWeight;
+    $scope.percentNeededForC = percentForC * 100;
+    $scope.pointsNeededForC = Math.ceil(percentForC * $scope.finalPtsPossible);
+    console.log("temp: "+temp+" percent for C " + percentForC * 100 + " points for C " + $scope.pointsNeededForC);
 
   }
 

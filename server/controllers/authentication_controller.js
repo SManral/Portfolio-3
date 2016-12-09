@@ -7,6 +7,7 @@ module.exports.signup = function(req, res){
 	User.find({
 		'$or': [{username: req.body.username}, {password: req.body.password}]
 	}, function(err, result){
+		console.log(result);
 		if(result.length === 0) {
 			var user = new User(req.body);
 			user.save();
@@ -17,14 +18,14 @@ module.exports.signup = function(req, res){
 				firstname: req.body.firstName
 			}
 			console.log(userData);
-			res.json({res: 'success', data: userData});	
+			res.json({res: 'success', data: userData});
 		}
 		else {
-			res.json({res: 'error', error: err});	
+			res.json({res: 'error', error: err});
 		}
 	})
 }
-//server side authentication for user login, if username and password match exists in 
+//server side authentication for user login, if username and password match exists in
 //the database then user logs in successfull else gets an error message.
 module.exports.login = function(req, res){
 	req.body.username = req.body.username.toLowerCase();
