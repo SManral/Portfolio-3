@@ -9,17 +9,18 @@ angular.module('myApp')
 		'email':'',
 		'phone':''
 	};
-	
-  
+
+
 	$scope.signup = function(user){
+		console.log(user);
 		$http.post('api/user/signup', user)
 		.success(function(callback){
 			console.log(callback);
 			$state.go('login');
 		}).error(function(err){
-			
+
 			console.log(err)
 		})
 	}
-	
+
 }]);

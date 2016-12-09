@@ -53,10 +53,10 @@
         <div class="text-center form-group">
 
           <div class="col-sm-8">
-            <input type="text" class="form-control" value={{category.title}} id="category"/>
+            <input type="text" class="form-control" value={{category.title}} ng-model="category.title" id="category"/>
           </div>
           <div class="col-sm-4" >
-            <input type="text" class="form-control" value={{category.weight}} id="weight"/>
+            <input type="text" class="form-control" value={{category.weight}} ng-model="category.weight" id="weight"/>
           </div>
         </div>
       </form>
@@ -80,7 +80,7 @@
               <h5>Assignment {{$index + 1}}</h5>
             </div>
             <div class="col-sm-4" >
-              <input type="text" class="form-control" value={{assignment.percent}} id="score"/>
+              <input type="text" class="form-control" value={{assignment.percent}} ng-model="assignment.percent" id="score"/>
             </div>
           </div>
         </form>
@@ -94,11 +94,37 @@
   <div class="col-md-4">
 
     <h4 class="text-center">Final</h4>
-    <div class="" ng-show="">
+    <div class="">
+      <form class="form-horizontal">
+        <div class="col-xs-7 text-right">
+          <label for="ptsPossible" class="control-label">Points Possible: </label>
+        </div>
+        <div class="col-xs-3">
+          <input type="text" id="ptsPossible" value={{finalPtsPossible}} ng-model="finalPtsPossible" class="form-control">
+        </div>
 
+      </form>
     </div>
-    <!--show current errors -->
-    <div class="" ng-hide="">
+    <div class="">
+      <form class="form-horizontal">
+        <div class="col-xs-7 text-right">
+          <label for="weightFinal" class="control-label">Final Weight: </label>
+        </div>
+        <div class="col-xs-3">
+          <input type="text" id="weightFinal" value={{finalWeight}}  ng-model="finalWeight" class="form-control">
+        </div>
+
+      </form>
+    </div>
+    <div class="row">
+
+      <div class="" ng-show="totalWeight == 100 && finalWeight > 0 ">
+        <h1>Correct</h1>
+      </div>
+      <!--show current errors -->
+      <div class="" ng-hide="totalWeight == 100 && finalWeight > 0">
+        <h1>Wrong</h1>
+      </div>
 
     </div>
 
