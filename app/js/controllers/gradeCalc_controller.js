@@ -2,10 +2,10 @@ angular.module('myApp')
 .controller('GradeCalcController', ['$scope','$http','$state', function($scope, $http, $state){
 
   class Assignment{
-    constructor(name, score, ptsPossible){
+    constructor(name, percent){
       this.name = name;
-      this.score = score;
-      this.ptsPossible = ptsPossible;
+      this.percent = percent;
+      //this.ptsPossible = ptsPossible;
     }
   }
 
@@ -17,8 +17,10 @@ angular.module('myApp')
       this.assignments = []
     }
 
-    addAssignment(name, score, ptsPossible){
-      this.assignments.push(new Assignment(name, score, ptsPossible));
+
+
+    addAssignment(name, percent){
+      this.assignments.push(new Assignment(name, percent));
     }
 
     removeLastAssignment(){
@@ -26,20 +28,47 @@ angular.module('myApp')
     }
   }
 
+  class Grade{
+    constructor(letter, num){
+      this.letter = letter;
+      this.num = num;
+    }
+  }
+
 
 
   $scope.class = "";
-  $scope.categories = [new Category("Homework", .75)];
 
-  $scope.categories.push(new Category("Homework", .75));
+  $scope.grades= [new Grade('A', 90)];
 
-  $scope.categories.push(new Category("Homework", .75));
+  $scope.grades.push(new Grade('B', 80));
+  $scope.grades.push(new Grade('C', 70));
+  $scope.grades.push(new Grade('D', 60));
+  $scope.grades.push(new Grade('F', 50));
 
-  $scope.categories[0].addAssignment("Assignment", 50, 100);
-  $scope.categories[0].addAssignment("Assignment", 60, 100);
-  $scope.categories[0].addAssignment("Assignment", 70, 100);
+  $scope.categories =  [new Category("Test", 0)];
+  $scope.categories.push(new Category("Quizzes", 0));
+  $scope.categories.push(new Category("Homework", 0));
 
- 
+  $scope.finalWeight;
 
+  // $scope.categories[0].addAssignment("Assignment", 50);
+  // $scope.categories[0].addAssignment("Assignment", 60);
+  // $scope.categories[0].addAssignment("Assignment", 70);
+
+  function showOutcomes(){
+    for(var i = 0; i < $scope.categories.length; i++){
+
+    }
+  }
+
+
+  $scope.addCategory = function(){
+    $scope.categories.push(new Category("", ""));
+  }
+
+  $scope.removeCategory = function(){
+    $scope.categories = $scope.categories.splice(0, $scope.categories.length - 1);
+  }
 
 }]);
