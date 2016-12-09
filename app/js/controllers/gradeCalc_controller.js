@@ -148,7 +148,7 @@ angular.module('myApp')
 
     var percentForB = ($scope.grades[1].num - $scope.currentGrade) / $scope.finalWeight;
     $scope.percentNeededForB = percentForB * 100;
-    $scope.pointsNeededForB = Math.ceil(percentForA * $scope.finalPtsPossible);
+    $scope.pointsNeededForB = Math.ceil(percentForB * $scope.finalPtsPossible);
     console.log("temp: "+temp+" percent for B " + percentForB * 100 + " points for B " + $scope.pointsNeededForB);
 
     var percentForC = ($scope.grades[2].num - $scope.currentGrade) / $scope.finalWeight;
