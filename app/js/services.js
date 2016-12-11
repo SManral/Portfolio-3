@@ -77,7 +77,7 @@ angular.module('myApp')
         // to
         ctx.lineTo(cX,cY);
         // color
-        ctx.strokeStyle = "#4bf";
+        ctx.strokeStyle = "#FFF";
         // draw it
         ctx.stroke();
       }
