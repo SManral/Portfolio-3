@@ -1,17 +1,48 @@
-.left {
-  width:70%;
-  float:left;
-}
-​
-.right {
-  width:27%;
-  float:right;
+.up {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
 }
 
-@media screen and (max-width:767px) {
-  
-  .right,
-  .left {
-    width:100%;
-  }
+ol {
+    float: left;
+    border-right:1px solid #bbb;
+    margin-bottom: 0;
+}
+
+ol a {
+    display: block;
+    color: white;
+    font-size: 150%;
+    text-align: center;
+    padding: 8px 18px;
+    text-decoration: none !important;
+}
+ol a:hover {
+    color: #f10865;
+    background-color: #111;
+}
+
+
+.main {
+    background-color: #eee;
+    width: 100%;
+    display: inline-block;
+}
+.main section {
+    border: 1px solid #333;
+    min-height: 100vh;
+    position: relative;
+}
+.main section.bigSection {
+    width: 70%;
+    display: inline-block;
+    float: left;
+}
+.main section.chatSection {
+    width: 30%;
+    display: inline-block;
+    float: right;
 }

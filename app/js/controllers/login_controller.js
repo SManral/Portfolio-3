@@ -18,6 +18,7 @@ angular.module('myApp')
 					$scope.callback = '';
 					callback.data.type = "user";
 					localStorage.setItem('User-Data', JSON.stringify(callback.data));
+					alert("Welcome "+ callback.data.username+ '^^');
 					$state.go('homepage');
 				}
 				console.log(callback);

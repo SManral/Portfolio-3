@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var User = require('../datasets/users');
 
 module.exports.signup = function(req, res){
+	console.log(req.body);
 	req.body.username = req.body.username.toLowerCase();
 	req.body.password = req.body.password.toLowerCase();
 	User.find({
@@ -49,3 +50,4 @@ module.exports.login = function(req, res){
 		}
 	})
 }
+

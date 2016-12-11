@@ -1,8 +1,39 @@
-<div class= "left">
-	<a href="#/gradeCalculator">Grade Calculator</a><br>
-	<a href="#/uploadFiles">Upload your work</a><br>
-	<a href="#/login">Signout</a><br>
+<div class="up">
+  <ol><a class="active" href="#/homepage">Home</a></ol>
+  <ol><a href="#gradeCalculator">Grade Calculator</a></ol>
+  <ol><a href="#flashcards">Flash Cards</a></ol>
+  <ol><a href="#chat">Study Chat</a></ol>
+   <ol style="float:right"><a href="#login">Signout</a></ol>
 </div>
 
+<div class="main">
+<section class="bigSection"></section>
+<section class="chatSection">
+	<div ng-include="'app/partials/chat.html'"></div>
+</section>
+</div>
+
+<style type="text/css">
+.fm {
+    background: #000;
+    padding: 3px;
+    position: absolute;
+    bottom: 44px;
+    width: 100%;
+}
+form input { 
+	border: 0; 
+	padding: 10px; 
+	width: 77%; 
+	margin-right: .5%; 
+}
+form #button { 
+	color:#FFF; 
+	background: #008080	; 
+	border: none; 
+	padding: 10px;  
+	width: 22%; 
+}
+</style>
 
 

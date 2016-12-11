@@ -1,0 +1,24 @@
+ <ul id="messages"></ul>
+    <span id="notifyUser"></span>
+    <form id="form" class= "fm" action="" onsubmit="return submitfunction();" > 
+      <input type="hidden" id="user" value="" /><input id="m" autocomplete="off" onkeyup="notifyTyping();" placeholder="Type yor message here.." /><input type="submit" id="button" value="Send"/> 
+    </form>
+
+    <script type="text/javascript">
+    var socket = io(); 
+
+    function submitfunction(){
+  var from = $('#user').val();
+  var message = $('#m').val();
+  if(message != '') {
+  socket.emit('chatMessage', from, message);
+}
+$('#m').val('').focus();
+  return false;
+}
+ 
+function notifyTyping() { 
+  var user = $('#user').val();
+  socket.emit('notifyUser', user);
+}
+    </script>

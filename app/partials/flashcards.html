@@ -1,0 +1,12 @@
+<div ng-repeat=“question in Item class=“col-md-9”>
+	<div class = “flip”>
+		<div class=“filmcard card” ng-class=“{‘flipped’:isFlipped}” ng-click=“isFlipped =! isFlipped”>
+			<div class=“face front”>
+				<p class=“flashcard-wrap”>{{question.Question}}</p>
+			</div>
+			<div class=“face back”>
+				<p class=“flashcard-wrap”>{{question.Answer}}</p>
+			</div>
+		</div>
+	</div>
+</div>

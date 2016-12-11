@@ -15,17 +15,22 @@ angular.module('myApp', ['ui.router'])
         .state('homepage', {
             url: "/homepage",
             templateUrl: 'app/partials/homepage.html',
-            controller: 'HomepageController'
+            controller: 'Chat'
         })
          .state('gradeCalculator', {
             url: "/gradeCalculator",
             templateUrl: 'app/partials/gradeCalculator.html',
             controller: 'GradeCalcController'
         })
-          .state('uploadFiles', {
-            url: "/uploadFiles",
-            templateUrl: 'app/partials/uploadFiles.html',
-            controller: 'UploadFilesController'
+          .state('flashcards', {
+            url: "/flashcards",
+            templateUrl: 'app/partials/flashcards.html',
+            controller: 'FlashcardsController'
+        })
+          .state('chat', {
+            url: "/chat",
+            templateUrl: 'app/partials/chat.html',
+            controller: 'Chat'
         })
 
         

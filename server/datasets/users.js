@@ -1,3 +1,4 @@
+//schema for storing users details upon creating a new acoount
 var mongoose = require('mongoose');
 var UserSchema = new mongoose.Schema({
 	username: {

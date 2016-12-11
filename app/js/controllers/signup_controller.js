@@ -11,14 +11,15 @@ angular.module('myApp')
 	};
 
 
-	$scope.signup = function(user){
+	$scope.signup = function(user){debugger;
 		console.log(user);
-		$http.post('api/user/signup', user)
+		$http.post('api/user/signup', $scope.user)
 		.success(function(callback){
 			console.log(callback);
+			alert("Hurray! You have been sucessfully signed up!");
 			$state.go('login');
 		}).error(function(err){
-
+			alert("Oops! Failed to sign up, Try again!");
 			console.log(err)
 		})
 	}
