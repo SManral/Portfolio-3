@@ -26,9 +26,11 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 })
 
+// io.sockets.on('connection', socket)
+
 //Register events on socket connection
 
-io.on('connection', function(socket){ 
+io.on('connection', function(socket){
   socket.on('chatMessage', function(from, msg){
     io.emit('chatMessage', from, msg);
   });
@@ -56,30 +58,3 @@ app.post('/api/user/login', authenticationController.login);
 server.listen('3000', function(){
 	console.log('Server working');
 })
-
-// app.listen('3000', function(){
-// 	console.log('Server working');
-// })
-
-//require('./server/controllers/blackboard_controller');
-
-// io.on('connection', function(socket){
-// 	console.log('A user is connected');
-//
-// 	socket.emit('init', {
-// 		name: 'TEST'
-// 	});
-//
-// 	// socket.on('add_user', function(user){
-// 	// 	io.emit('response', {
-// 	// 		test:'test',
-// 	// 		user: user
-// 	// 	})
-// 	// });
-//
-// 	socket.on('disconnect', function(){
-// 		console.log('user disconnected');
-// 	});
-// });
-
-

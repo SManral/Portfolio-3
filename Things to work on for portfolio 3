@@ -10,3 +10,9 @@
 - live chat
 - group blackboard
   -know when users are online
+
+
+//Stuff to fix
+  - complete whiteboard
+  - add header to gradeCalculator
+  - user added twice to study chat(fix: universal socket connection with factory)
