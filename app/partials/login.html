@@ -1,11 +1,11 @@
 <div class="loginBg">
-    <div class="container">
-    <div class="panel loginFormPanel" >
-    <div class="pageHeader text-center" ><h1>Login Form {{title}}</h1></div>
-    <form name="form"  role="form" novalidate>   
+  <div class="container">
+  <div class="panel loginFormPanel" >
+  <div class="pageHeader text-center" ><h1>Login Form {{title}}</h1></div>
+  <form name="form"  role="form" novalidate>
 
     <div class="formCred form-group" ng-class="{'has-error': form.username.$invalid && !form.username.$pristine}">
-    
+
         <label for="username">Username</label><br>
         <input type="text" name="username" id="username" class="formCred form-control" ng-model="user.username" required ng-change="onlyU()" />
         <p ng-show="form.username.$invalid && !form.username.$pristine" class="help-block">Username is required.</p>
@@ -21,10 +21,10 @@
     <div class="alert alert-danger" ng-show="callback != '' ">
         <strong>{{callback}}</strong>
     </div>
-</form>
-<div>
+  </form>
+  <div>
         <a href="#/signup"><button type="button" class="signupAsStudent btn btn-default">Sign up as User</button></a>
-    </div> 
+    </div>
 </div>
 
 <style>

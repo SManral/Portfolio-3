@@ -1,10 +1,13 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+
 var app = express();
 var server   = require('http').Server(app);
 var io  = require('socket.io')(server);
 var path = require('path');
+var socket = require('./server/controllers/socket.js');
+
 
 var authenticationController = require('./server/controllers/authentication_controller');
 
@@ -53,4 +56,30 @@ app.post('/api/user/login', authenticationController.login);
 server.listen('3000', function(){
 	console.log('Server working');
 })
+
+// app.listen('3000', function(){
+// 	console.log('Server working');
+// })
+
+//require('./server/controllers/blackboard_controller');
+
+// io.on('connection', function(socket){
+// 	console.log('A user is connected');
+//
+// 	socket.emit('init', {
+// 		name: 'TEST'
+// 	});
+//
+// 	// socket.on('add_user', function(user){
+// 	// 	io.emit('response', {
+// 	// 		test:'test',
+// 	// 		user: user
+// 	// 	})
+// 	// });
+//
+// 	socket.on('disconnect', function(){
+// 		console.log('user disconnected');
+// 	});
+// });
+
 

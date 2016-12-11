@@ -1,12 +1,12 @@
 <html ng-app="myApp">
 <head>
 	<title>Portfolio 3</title>
-</head>
-<body>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="app/css/app_css.css"/>
+
 	<link rel="stylesheet" href="app/css/app.css"/>
 	<link rel="stylesheet" href="app/css/flashcard.css"/>
+
 
 	<div data-ui-view></div>
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
@@ -14,6 +14,7 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
 	<script type="text/javascript" src="app/app.js"></script>
+
 	<!-- clientside controllers -->
 	<script type="text/javascript" src="app/js/controllers/login_controller.js"></script>
 	<script type="text/javascript" src="app/js/controllers/signup_controller.js"></script>
@@ -21,6 +22,13 @@
 	<script type="text/javascript" src="app/js/controllers/gradeCalc_controller.js"></script>
 	<script type="text/javascript" src="app/js/controllers/flashcards_controller.js"></script>
 	<script type="text/javascript" src="app/js/controllers/chat.js"></script>
+	<script type="text/javascript" src="app/js/services.js">
 
-</body>
+	</script>
+
+
+	<script src="/socket.io/socket.io.js"></script>
+
+</head>
+
 </html>

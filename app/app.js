@@ -1,6 +1,6 @@
 angular.module('myApp', ['ui.router'])
-
 .config(function ($stateProvider, $urlRouterProvider) {
+    console.log('work!!');
     $stateProvider
         .state('login', {
             url: "/login",
@@ -33,7 +33,6 @@ angular.module('myApp', ['ui.router'])
             controller: 'Chat'
         })
 
-        
+
     $urlRouterProvider.otherwise('/login');
 });
- 
