@@ -7,10 +7,10 @@ var server   = require('http').Server(app);
 var io  = require('socket.io')(server);
 var path = require('path');
 var socket = require('./server/controllers/socket.js');
-
-
+var Chat = require('./server/datasets/chat');
+var FlashCardsController = require('./server/controllers/flashcards_controller');
 var authenticationController = require('./server/controllers/authentication_controller');
-
+//var chatController = require('./server/controllers/chat_controller');
 //database name portfolio3db
 mongoose.connect('mongodb://localhost:27017/portfolio3db');
 
@@ -26,14 +26,39 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 })
 
-// io.sockets.on('connection', socket)
-
-//Register events on socket connection
-
 io.on('connection', function(socket){
   socket.on('chatMessage', function(from, msg){
-    io.emit('chatMessage', from, msg);
-  });
+      var newMsg = new Chat({
+        username: from,
+        content: msg,
+        room: 'room',
+        created: new Date()
+      });
+      if(from !== 'System') {
+        newMsg.save(function(err){
+          if(err)
+            throw err
+          else
+            io.emit('chatMessage', from, newMsg);
+        });
+      }
+      else {
+        Chat.find({})
+        .exec(function(err, result){
+          if(err)
+            throw err;
+          else {
+            for(var i =0; i< result.length; i++) {
+              console.log(result[i]);
+              io.emit('chatMessage', result[i].username, result[i]);
+            }
+          }
+          });
+}
+    
+      });
+        
+  
   socket.on('notifyUser', function(user){
     io.emit('notifyUser', user);
    });
@@ -53,6 +78,9 @@ app.all('*', function(req, res, next) {
 //route for authentication for users
 app.post('/api/user/signup', authenticationController.signup);
 app.post('/api/user/login', authenticationController.login);
+app.post('/api/cards/flashcards', FlashCardsController.insert);
+app.get('/api/cards/get', FlashCardsController.get);
+//app.post('/api/chat/send', chatController.send);
 
 
 server.listen('3000', function(){

@@ -1,72 +1,95 @@
 angular.module('myApp')
 .controller('FlashcardsController', ['$scope','$http','$state', function($scope, $http, $state){
-$scope.getAll = function () {
 
-$scope.data = {  "Name": "New",
-"Item": [
-{ "Question": "What is mongo ?", "Answer": "it is something" },
-{ "Question": "what is mean stack?", "Answer": "it is also something" },
-]};
+String.prototype.isEmpty = function() {
+            return (this.length === 0 || !this.trim());
+        };
 
-$scope.$watch('$scope.data', function () {
-            $scope.loadFlashCard($scope.data);
-            $scope.loadSideBar($scope.data);
-        });
-}
-$scope.getAll();
-$scope.loadFlashCard = function (data) {
-        $scope.flashCard = data.title;
-        $scope.questions = data.Item;
-        $scope.totalItems = $scope.questions.length;
-        $scope.itemsPerPage = 1;
-        $scope.currentPage = 1;
-        $scope.mode = 'flashcard';
-        $scope.$watch('currentPage + itemsPerPage', function () 
-        {
-        var begin = (($scope.currentPage - 1) * $scope.itemsPerPage),
-        end = begin + $scope.itemsPerPage;
-        $scope.filteredQuestions = $scope.questions.slice(begin, end);
-        });
-    }
-$scope.loadSideBar = function (data) {
-        $scope.sideBarquestions = data.Item;
-        $scope.sideBartotalItems = $scope.questions.length;
-        $scope.sideBaritemsPerPage = 4;
-        $scope.sideBarcurrentPage = 1;
-        $scope.$watch('sideBarcurrentPage + sideBaritemsPerPage', function () {
-            var begin = (($scope.sideBarcurrentPage - 1) * $scope.sideBaritemsPerPage),
-              end = begin + $scope.sideBaritemsPerPage;
-            $scope.sideBarfilteredQuestions = $scope.sideBarquestions.slice(begin, end);
-            $scope.begin = begin;
-            $scope.end = end;
-        });
- 	}
-//for next set of sidebar
-    $scope.goToSideBar = function () {
-        $scope.sideBarfilteredQuestions = $scope.sideBarquestions.slice($scope.begin + 1, $scope.end + 1);
-        $scope.begin = $scope.begin + 1;
-        $scope.end = $scope.end + 1;
-    }
-    //for back set of sidebar
-    $scope.goBackSideBar = function () {
-        $scope.sideBarfilteredQuestions = $scope.sideBarquestions.slice($scope.begin - 1, $scope.end - 1);
-        $scope.begin = $scope.begin - 1;
-        $scope.end = $scope.end - 1;
-    }
-//for the next flashcard
-    $scope.goTo = function (index) {
-        if (index > 0 && index <= $scope.totalItems) {
-            $scope.currentPage = index;
-            $scope.mode = 'flashcard';
-        }
-        //if the next flashcard not in sidebar
-        if (index > $scope.end && index != 1) {
-            $scope.goToSideBar();
+        function Card(front, back){
+            this.front = front;
+            this.back = back;
+
+            this.display = function(side){
+                if( side === 0 ){
+                    return this.front;
+                }else{
+                    return this.back;
+                }
+            };
         }
 
-        if (index <= $scope.begin && index != 1) {
-            $scope.goBackSideBar();
-        }
-    }
+        var cardfunc = { 
+            cards: [],
+            cIndex: 0,
+            cSide: 0,
+            cButton: document.getElementById("cardButton"),
+            cText: document.getElementById("cardText"),
+            cPosition: document.getElementById("positionIndex"),
 
-}]);
+            addC:function(back, front){
+                this.cards.push( new Card(back, front) );
+            },
+            updateC: function(){
+                var curCard = this.cards[ this.cIndex ];
+                this.cText.innerHTML = curCard.display( this.cSide );
+                this.cPosition.innerHTML = (this.cIndex+1)+"/"+this.cards.length;
+            },
+            flipC: function(){
+                this.cSide = (this.cSide + 1) % 2;
+            },
+            moveC: function(moveBy){
+                this.cIndex += moveBy;
+                if( this. cIndex < 0 ){
+                    this.cIndex += this.cards.length;
+                }
+                this.cIndex = this.cIndex % this.cards.length;
+
+                this.cSide = 0;
+                this.updateC();
+            },
+            tapC: function(){
+                this.flipC();
+                this.updateC();
+            }
+        };
+
+        $scope.moveC = function(moveBy) {debugger;
+            cardfunc.moveC(moveBy);
+        }
+
+        $http.get('api/cards/get')
+        .success(function(cards){
+            $scope.listCards = cards;
+            angular.forEach(cards, function(card){
+                if(typeof card === "object") {
+                    for (var i = 0; i < card.length ; i++) {
+
+                        cardfunc.addC(card[i].front, card[i].back);
+                    };
+                    
+                }
+            });
+            cardfunc.updateC();
+        }).error(function(err){
+            console.log(err);
+        })
+        $scope.addingCard = function(){debugger;
+            var front = document.getElementById("newFront"),
+                back = document.getElementById("newBack");
+                var data = {'front':front.value, 'back':back.value};
+
+            $http.post('api/cards/flashcards',data)
+                .success(function(callback){debugger;
+                if(front.value.isEmpty() || back.value.isEmpty() )
+                    return;
+            cardfunc.addC(callback.data.front,callback.data.back);
+            front.value="";
+            back.value="";
+            cardfunc.updateC();  
+            })
+            .error(function(err){
+                console.log(err);
+            })
+        }
+        cardfunc.cButton.addEventListener('click', function(){ cardfunc.tapC();} );
+    }]);

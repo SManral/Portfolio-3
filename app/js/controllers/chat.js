@@ -3,7 +3,7 @@ angular.module('myApp')
 var socket = io();
 
 function submitfunction(){
-	alert("ggg");
+	
   var from = $('#user').val();
   var message = $('#m').val();
   if(message != '') {
@@ -17,12 +17,12 @@ function notifyTyping() {
   var user = $('#user').val();
   socket.emit('notifyUser', user);
 }
- 
-socket.on('chatMessage', function(from, msg){
+$('#messages').empty();
+socket.on('chatMessage', function(from, newMsg){
   var me = $('#user').val();
   var color = (from == me) ? 'green' : '#009afd';
   var from = (from == me) ? 'Me' : from;
-  $('#messages').append('<li><b style="color:' + color + '">' + from + '</b>: ' + msg + '</li>');
+  $('#messages').append('<li><b style="color:' + color + '">' + from + '</b>:<strong> ' + newMsg.content + ' </strong><br/><span>'+newMsg.created+'</span>'+ '</li>');
 });
  
 socket.on('notifyUser', function(user){
@@ -37,6 +37,7 @@ $(document).ready(function(){
   $scope.user = JSON.parse(localStorage.getItem("User-Data"));
   var name = $scope.user.username;
   $('#user').val(name);
+
   socket.emit('chatMessage', 'System', '<b>' + name + '</b> has joined the discussion');
 });
  

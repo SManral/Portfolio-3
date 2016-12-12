@@ -12,14 +12,36 @@
 			<h1>Blackboard:</h1><br>
 		</div>
 		<label for="canvas"></label>
-		<canvas id="canvas" width="500" height="300" drawing ></canvas>
+		<canvas id="canvas" width="500" height="600" drawing ></canvas>
 </div>
 
 
 </section>
 <section class="chatSection">
-	<div ng-include="'app/partials/chat.html'"></div>
-</section>
+ <ul id="messages"></ul>
+    <span id="notifyUser"></span>
+    <form id="form" class= "fm" action="" onsubmit="return submitfunction();" >
+      <input type="hidden" id="user" value="" /><input id="m" autocomplete="off" onkeyup="notifyTyping();" placeholder="Type yor message here.." /><input type="submit" id="button" value="Send"/>
+    </form>
+
+    <script type="text/javascript">
+    var socket = io();
+
+    function submitfunction(){
+  var from = $('#user').val();
+  var message = $('#m').val();
+  if(message != '') {
+  socket.emit('chatMessage', from, message);
+}
+$('#m').val('').focus();
+  return false;
+}
+
+function notifyTyping() {
+  var user = $('#user').val();
+  socket.emit('notifyUser', user);
+}
+    </script></section>
 </div>
 
 <style type="text/css">
@@ -27,7 +49,6 @@
     background: #000;
     padding: 3px;
     position: absolute;
-    bottom: 44px;
     width: 100%;
 }
 form input {

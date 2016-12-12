@@ -5,9 +5,8 @@
     </form>
 
     <script type="text/javascript">
-    var socket = io();
-
-    function submitfunction(){
+var socket = io();
+function submitfunction(){
   var from = $('#user').val();
   var message = $('#m').val();
   if(message != '') {
@@ -16,9 +15,11 @@
 $('#m').val('').focus();
   return false;
 }
-
 function notifyTyping() {
   var user = $('#user').val();
   socket.emit('notifyUser', user);
 }
     </script>
+
+
+

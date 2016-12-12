@@ -1,12 +1,21 @@
-<div ng-repeat=“question in Item class=“col-md-9”>
-	<div class = “flip”>
-		<div class=“filmcard card” ng-class=“{‘flipped’:isFlipped}” ng-click=“isFlipped =! isFlipped”>
-			<div class=“face front”>
-				<p class=“flashcard-wrap”>{{question.Question}}</p>
-			</div>
-			<div class=“face back”>
-				<p class=“flashcard-wrap”>{{question.Answer}}</p>
-			</div>
-		</div>
-	</div>
-</div>
+<div id="newCards" >
+	 <center><h1>Create Flash Cards</h1></center>
+        <center>
+        	<label for="front">Front</label>
+            <input type="text" id="newFront" name="front"/></br><br>
+            <label for="back">Back</label>
+            <input type="text" id="newBack" name="back"/></br>
+            <button type="button" class="signupAsStudent btn btn-default" ng-click="addingCard();">Add</button>
+        </center>
+    </div>
+
+    <center><h2>View Flash Cards</h2></center>
+
+    <center><div id="cardButton" ><p id="cardText"></p></div></center><br>
+
+    <p align="center">
+        <input type="button" id="prevCard" class="signupAsStudent btn btn-default" value="previous" ng-click="moveC(-1);"/>
+        <span id="positionIndex">0/0</span>
+        <input type="button" id="nextCard" class="signupAsStudent btn btn-default" value="next" ng-click="moveC(1);"/>
+    </p>
+
